@@ -1,0 +1,13 @@
+{
+  "apiPort": 3003,
+
+  "logLevel": "debug",
+
+  "database": {
+    "host": "localhost",
+    "port": 27017,
+    "username": "forumUser",
+    "password": "forumPass",
+    "dbName": "forumDb"
+  }
+}

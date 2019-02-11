@@ -1,0 +1,197 @@
+openapi: 3.0.0
+info:
+  title: Lightning Api
+  version: 1.0.0
+  license:
+    name: Apache 2.0
+  description: |-
+    # BCDC Lightning API
+    This is the documentation for the BCDC Lightning API.
+paths:
+  /subscribe:
+    get:
+      security:
+        - ApiKeyAuth: []
+          AppId: []
+      description: Gets a list of all the subscriptions
+      responses:
+        '200':
+          description: List of subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscriptions"
+    post:
+      security:
+        - ApiKeyAuth: []
+          AppId: []
+      description: Subscribes a client to receive Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionPost"
+      responses:
+        '201':
+          description: subscription successfully created
+          content:
+            application/json:
+              schema:
+                description: subscription information
+                $ref: "#/components/schemas/Subscription"
+        '500':
+          description: Error occured creating subscription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      callbacks:
+        # the name `onData` is a convenience locator
+        onData:
+          # when data is sent, it will be sent to the `callbackUrl` provided
+          # when making the subscription
+          '{$request.query.callbackUrl}':
+            post:
+              requestBody:
+                description: subscription payload
+                content:
+                  application/json:
+                    schema:
+                      properties:
+                        package_id:
+                          type: string
+                          description: Identifier of specific data stream
+                        payload:
+                          type: object
+                          description: Full data payload
+                          properties:
+                            timestamp:
+                              type: string
+                              format: date-time
+                              description: Date and time of event
+                            latitude:
+                              type: number
+                              format: double
+                              description: Location Latitude (in UTM)
+                            longitude:
+                              type: number
+                              format: double
+                              description: Location Longitude (in UTM)
+                            strike_type:
+                              type: string
+                              description: Type of Strike [cloud to cloud, positive, negative, ground]
+                            dispatch_calls:
+                              type: array
+                              description: Calls to BCWS Dispatch
+                              items:
+                                type: object
+                                properties:
+                                  timestamp:
+                                    type: string
+                                    description: Time of the call
+                                    format: date-time
+                                  details:
+                                    type: string
+                                    description: Details of the call
+
+              responses:
+                '202':
+                  description: |
+                    Your server implementation should return this HTTP status code
+                    if the data was received successfully
+                '204':
+                  description: |
+                    Your server should return this HTTP status code if no longer interested
+                    in further updates
+components:
+  schemas:
+    _id:
+      type: Object
+      description: Object id
+      schema:
+        properties:
+          $oid:
+            type: string
+            description: Object id
+            example: 2531329f-fb09-4ef7-887e-84e648214436
+
+    id:
+      type: string
+      description: Object id
+      example: 2531329f-fb09-4ef7-887e-84e648214436
+
+    datasetId:
+      type: string
+      description: Object id
+      example: 2531329f-fb09-4ef7-887e-84e648214436
+
+    notificationUrl:
+      type: string
+      description: Object id
+      format: url
+      example: http://example.com
+
+    SubscriptionList:
+      required:
+        - _id
+        - datasetId
+        - notificationUrl
+      properties:
+        _id:
+          $ref: "#/components/schemas/_id"
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+        notificationUrl:
+          $ref: "#/components/schemas/notificationUrl"
+
+    Subscriptions:
+      type: array
+      items:
+        $ref: "#/components/schemas/SubscriptionList"
+
+    Subscription:
+      required:
+        - id
+        - datasetId
+        - notificationUrl
+      properties:
+        id:
+          $ref: "#/components/schemas/id"
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+        notificationUrl:
+          $ref: "#/components/schemas/notificationUrl"
+
+    SubscriptionPost:
+      required:
+        - datasetId
+        - notificationUrl
+      properties:
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+          in: "body"
+        notificationUrl:
+          $ref: "#/components/schemas/notificationUrl"
+          in: "body"
+
+    Error:
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: contains a message about the failure
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    AppId:
+      type: apiKey
+      in: header
+      name: id
+
+servers:
+  - url: '/v1/'
