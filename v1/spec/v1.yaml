@@ -21,11 +21,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Subscriptions"
+        '401':
+          description: unauthorized
     post:
       security:
         - ApiKeyAuth: []
           AppId: []
-      description: Subscribes a client to receive Webhooks
+      summary: Subscribes a client to receive Webhooks
+      description: |-
+       Subscribes a client to receive Webhooks. That client should expect http calls in the future to that exact url.
+       That client should response 202 (ACCEPTED) if it received the message, or at least a 200 (OK). If it returns 204 (NOT_ACCEPTABLE)
+       The it will be unsubscribed once the current payload is finished. The API will automatically chunk things to a configurable size
+       and therefore you will need to reassemble the JSON payload on the other end once it is finished. The payload contains:
+       ```
+       {
+            "datasetId": dataset id the notification is about,
+            "subscriptionId": the subscription id of the subscription that generated this call,
+            "filename": the file name, normally whats after the last / in the datasetid,
+            "part": the current chunk this is (for ordering),
+            "chunks": the amount of chunks that will be sent,
+            "data": the current chunk of data
+        }
+        ```
+
       requestBody:
         required: true
         content:
@@ -38,72 +56,54 @@ paths:
           content:
             application/json:
               schema:
-                description: subscription information
                 $ref: "#/components/schemas/Subscription"
-        '500':
+        '400':
           description: Error occured creating subscription
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-      callbacks:
-        # the name `onData` is a convenience locator
-        onData:
-          # when data is sent, it will be sent to the `callbackUrl` provided
-          # when making the subscription
-          '{$request.query.callbackUrl}':
-            post:
-              requestBody:
-                description: subscription payload
-                content:
-                  application/json:
-                    schema:
-                      properties:
-                        package_id:
-                          type: string
-                          description: Identifier of specific data stream
-                        payload:
-                          type: object
-                          description: Full data payload
-                          properties:
-                            timestamp:
-                              type: string
-                              format: date-time
-                              description: Date and time of event
-                            latitude:
-                              type: number
-                              format: double
-                              description: Location Latitude (in UTM)
-                            longitude:
-                              type: number
-                              format: double
-                              description: Location Longitude (in UTM)
-                            strike_type:
-                              type: string
-                              description: Type of Strike [cloud to cloud, positive, negative, ground]
-                            dispatch_calls:
-                              type: array
-                              description: Calls to BCWS Dispatch
-                              items:
-                                type: object
-                                properties:
-                                  timestamp:
-                                    type: string
-                                    description: Time of the call
-                                    format: date-time
-                                  details:
-                                    type: string
-                                    description: Details of the call
 
-              responses:
-                '202':
-                  description: |
-                    Your server implementation should return this HTTP status code
-                    if the data was received successfully
-                '204':
-                  description: |
-                    Your server should return this HTTP status code if no longer interested
-                    in further updates
+        '401':
+          description: unauthorized
+
+  /notify:
+    post:
+      security:
+        - ApiKeyAuth: []
+          AppId: ['admin']
+      description: Triggers notification on a dataset id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NotifyPost"
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotifyOK"
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        '401':
+          description: unauthorized
+
+
 components:
   schemas:
     _id:
@@ -173,6 +173,23 @@ components:
           in: "body"
         notificationUrl:
           $ref: "#/components/schemas/notificationUrl"
+          in: "body"
+
+    NotifyPost:
+      required:
+        - datasetId
+      properties:
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+          in: "body"
+
+    NotifyOK:
+      required:
+        - message
+      properties:
+        datasetId:
+          type: string
+          example: "Started notifications"
           in: "body"
 
     Error:

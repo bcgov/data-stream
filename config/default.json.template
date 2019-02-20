@@ -6,8 +6,17 @@
   "database": {
     "host": "localhost",
     "port": 27017,
-    "username": "forumUser",
-    "password": "forumPass",
-    "dbName": "forumDb"
+    "username": "lightning",
+    "password": "lightningPass",
+    "dbName": "lightning"
   }
+
+  "apiSecret": {
+    "user1": "pass1",
+    "user2": "pass2",
+  },
+
+  "dataUrl": "https://catalogue.data.gov.bc.ca/dataset/",
+
+  "chunkSize": 1024
 }

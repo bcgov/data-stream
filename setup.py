@@ -41,7 +41,8 @@ setup(
         'gevent',
         'pyyaml',
         'requests',
-        'mongoengine'
+        'mongoengine',
+        'pyshp'
     ],
     setup_requires=[
     ],

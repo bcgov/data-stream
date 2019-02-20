@@ -5,9 +5,9 @@ except ImportError:
 import logging
 import pkg_resources  # part of setuptools
 import config
-import os
+import json
 
-from flask import Flask, g, jsonify, make_response, url_for, Response
+from flask import Flask, g, jsonify, make_response, Response, request
 from flask_compress import Compress
 import v1.v1 as v1
 
@@ -35,8 +35,6 @@ def create_app(test_config=None):
 
         g.request_start_time = timer()
         g.request_time = lambda: "%s" % (timer() - g.request_start_time)
-        resp = Response()
-        resp.headers['Content-Type'] = ["application/json"]
 
     @app.after_request
     def after_request(response):
@@ -69,6 +67,28 @@ def create_app(test_config=None):
         return jsonify({
             "name": pkg_resources.require("lightning")[0].project_name
         })
+
+    @app.route('/test', methods=['POST'], strict_slashes=False)
+    def test():
+        """
+        test endpoint for callbacks
+        :return: {ok:ok}
+        """
+
+        body = request.get_json()
+        files = request.files
+
+        log.debug("Files? "+str(len(files)))
+        if not(body is None):
+            log.debug("Dataset ID: " + body['datasetId'])
+
+        if 'data' in body:
+            log.debug(body['data'])
+
+
+        return jsonify({
+            "ok": "OK"
+        }),HTTPStatus.ACCEPTED
 
     @app.route('/version', methods=['GET'], strict_slashes=False)
     def version():

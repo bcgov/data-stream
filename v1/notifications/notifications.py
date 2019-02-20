@@ -1,1 +1,1 @@
-from notifications.notifications import notifications
+from notifications.notifications import Notifications

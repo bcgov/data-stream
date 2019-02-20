@@ -34,10 +34,10 @@ def subscribePost() -> object:
     body = request.get_json()
 
     if not('datasetId') in body:
-        return jsonify({"error": "datasetId is a required attribute"}), HTTPStatus.INTERNAL_SERVER_ERROR
+        return jsonify({"error": "datasetId is a required attribute"}), HTTPStatus.HTTPStatus.BAD_REQUEST
 
     if not('notificationUrl') in body:
-        return jsonify({"error": "notificationUrl is a required attribute"}), HTTPStatus.INTERNAL_SERVER_ERROR
+        return jsonify({"error": "notificationUrl is a required attribute"}), HTTPStatus.HTTPStatus.BAD_REQUEST
 
 
     subscription = db.Subscriptions(
