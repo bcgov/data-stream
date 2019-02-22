@@ -1,0 +1,5 @@
+config/*
+Dockerfile
+helm/*
+venv/*
+datasets/*

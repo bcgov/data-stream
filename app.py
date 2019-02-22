@@ -65,7 +65,7 @@ def create_app(test_config=None):
         """
 
         return jsonify({
-            "name": pkg_resources.require("lightning")[0].project_name
+            "name": pkg_resources.require("DataStreamApi")[0].project_name
         })
 
     @app.route('/test', methods=['POST'], strict_slashes=False)
@@ -100,7 +100,7 @@ def create_app(test_config=None):
         if environ.get('GITHASH') is not None:
             hash = environ.get("GITHASH")
 
-        v = pkg_resources.require("lightning")[0].version
+        v = pkg_resources.require("DataStreamApi")[0].version
 
         version = v
         if hash != "":

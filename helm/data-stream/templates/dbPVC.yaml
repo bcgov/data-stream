@@ -1,0 +1,39 @@
+{{- if .Values.createDatabase -}}
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "data-stream.fullname" . }}-mongo-pvc
+  labels:
+      app: {{ template "data-stream.name" . }}-mongo
+      chart: {{ template "data-stream.chart" . }}
+      release: {{ .Release.Name }}
+      heritage: {{ .Release.Service }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{.Values.storageClassName}}
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "data-stream.fullname" . }}-mongo-data-pvc
+  labels:
+      app: {{ template "data-stream.name" . }}-mongo
+      chart: {{ template "data-stream.chart" . }}
+      release: {{ .Release.Name }}
+      heritage: {{ .Release.Service }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{.Values.storageClassName}}
+  resources:
+    requests:
+      storage: 5Gi
+
+{{- end }}

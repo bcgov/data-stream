@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "data-stream.fullname" . }}-configmap
+data:
+  default.json: |-
+    {
+      "apiPort": 3003,
+
+      "logLevel": "{{ .Values.logLevel }}",
+
+      "database": {
+        "host": "{{ .Values.database.host }}",
+        "port": {{ .Values.database.port }},
+        "username": "{{ .Values.database.username }}",
+        "password": "{{ .Values.database.password }}",
+        "dbName": "{{ .Values.database.dbName }}"
+      },
+
+      "apiSecret": {{ .Values.apiSecret | toJson }},
+
+      "dataUrl": "{{ .Values.dataUrl }}",
+
+      "chunkSize": {{ .Values.chunkSize }}
+    }

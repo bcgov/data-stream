@@ -4,7 +4,7 @@
 .vscode
 
 ##Helm
-helm/validate-api/config.yaml
+helm/data-stream/config.yaml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

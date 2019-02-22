@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "data-stream.fullname" . }}-pvc
+  labels:
+      app: {{ template "data-stream.name" . }}
+      chart: {{ template "data-stream.chart" . }}
+      release: {{ .Release.Name }}
+      heritage: {{ .Release.Service }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{.Values.storageClassName}}
+  resources:
+    requests:
+      storage: 5Gi

@@ -1,0 +1,21 @@
+{{- if .Values.createDatabase -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "data-stream.fullname" . }}-mongo
+  labels:
+    app: {{ template "data-stream.name" . }}-mongo
+    chart: {{ template "data-stream.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 27017
+      targetPort: mongo
+      protocol: TCP
+      name: mongo
+  selector:
+    app: {{ template "data-stream.name" . }}-mongo
+    release: {{ .Release.Name }}
+{{- end }}

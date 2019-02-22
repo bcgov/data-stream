@@ -1,0 +1,79 @@
+# Default values for data-stream.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: bcgovimages/data-stream
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+logLevel: "notset"
+
+database:
+  host: "localhost"
+  port: 27017
+  username: "stream"
+  password: "stream"
+  dbName: "stream"
+
+apiSecret:
+  admin: "ImAnAdminShortAndStout"
+  dev: "ImADeveloperKey"
+
+dataUrl: "https://catalogue.data.gov.bc.ca/dataset/"
+
+chunkSize: 1024
+
+createDatabase: true
+storageClassName: default
+dbPod:
+  persistence: /data/db
+  adminEnv: MONGO_INITDB_ROOT_USERNAME
+  admin: root
+  passEnv: MONGO_INITDB_ROOT_PASSWORD
+  pass: root
+  dbEnv: MONGO_INITDB_DATABASE
+  addAdminPassEnv: false
+  adminPassEnv: MONGODB_ADMIN_PASSWORD
+  initDb: true
+
+mongoImage:
+  repository: mongo
+  tag: 4.1

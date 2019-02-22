@@ -25,7 +25,7 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 setup(
-    name='DataStream Api',
+    name='DataStreamApi',
     author='Brandon Sharratt',
     author_email='',
     version='0.1',
@@ -42,7 +42,8 @@ setup(
         'pyyaml',
         'requests',
         'mongoengine',
-        'pyshp'
+        'pyshp',
+        'pandas'
     ],
     setup_requires=[
     ],
