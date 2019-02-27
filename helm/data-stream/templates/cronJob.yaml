@@ -1,0 +1,84 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ template "data-stream.fullname" . }}-cron-one
+  labels:
+    app: {{ template "data-stream.name" . }}
+    chart: {{ template "data-stream.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  schedule: {{ .Values.cronSchedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: notify-fire-points
+            image: byrnedo/alpine-curl
+            args:
+            - "-X POST"
+            - {{ index .Values.ingress.hosts 0 }}
+            - "-H 'Content-Type: application/json'"
+            - "-H 'id: admin'"
+            - "-H 'x-api-key: {{ .Values.apiSecret.admin }}'"
+            - "-d '{\"datasetId\": \"file://prot_current_fire_points/prot_current_fire_points.shp\"}'"
+          restartPolicy: OnFailure
+
+---
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ template "data-stream.fullname" . }}-cron-two
+  labels:
+    app: {{ template "data-stream.name" . }}
+    chart: {{ template "data-stream.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  schedule: {{ .Values.cronSchedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: notify-fire-poly
+            image: byrnedo/alpine-curl
+            args:
+            - "-X POST"
+            - {{ index .Values.ingress.hosts 0 }}
+            - "-H 'Content-Type: application/json'"
+            - "-H 'id: admin'"
+            - "-H 'x-api-key: {{ .Values.apiSecret.admin }}'"
+            - "-d '{\"datasetId\": \"file://prot_current_fire_polys/prot_current_fire_polys.shp\"}'"
+          restartPolicy: OnFailure
+
+---
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ template "data-stream.fullname" . }}-cron-three
+  labels:
+    app: {{ template "data-stream.name" . }}
+    chart: {{ template "data-stream.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  schedule: {{ .Values.cronSchedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: notify-lightning
+            image: byrnedo/alpine-curl
+            args:
+            - "-X POST"
+            - {{ index .Values.ingress.hosts 0 }}
+            - "-H 'Content-Type: application/json'"
+            - "-H 'id: admin'"
+            - "-H 'x-api-key: {{ index .Values.apiSecret.admin }}'"
+            - "-d '{\"datasetId\": \"file://lightning_BC_Jul2018.csv\"}'"
+          restartPolicy: OnFailure

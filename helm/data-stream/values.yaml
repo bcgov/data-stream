@@ -59,6 +59,8 @@ apiSecret:
 
 dataUrl: "https://catalogue.data.gov.bc.ca/dataset/"
 
+cronSchedule: "*/5 * * * *"
+
 chunkSize: 1024
 
 createDatabase: true
