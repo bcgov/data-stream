@@ -59,7 +59,7 @@ apiSecret:
 
 dataUrl: "https://catalogue.data.gov.bc.ca/dataset/"
 
-cronSchedule: "*/5 * * * *"
+cronSchedule: "* * * * *"
 
 chunkSize: 1024
 

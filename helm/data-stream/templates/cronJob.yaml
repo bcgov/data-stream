@@ -15,14 +15,13 @@ spec:
         spec:
           containers:
           - name: notify-fire-points
-            image: byrnedo/alpine-curl
+            image: alebatt/bat
             args:
-            - "-X POST"
-            - {{ index .Values.ingress.hosts 0 }}
-            - "-H 'Content-Type: application/json'"
-            - "-H 'id: admin'"
-            - "-H 'x-api-key: {{ .Values.apiSecret.admin }}'"
-            - "-d '{\"datasetId\": \"file://prot_current_fire_points/prot_current_fire_points.shp\"}'"
+            - 'POST'
+            - {{ index .Values.ingress.hosts 0 }}/v1/notify
+            - 'id:admin'
+            - 'x-api-key:{{ .Values.apiSecret.admin }}'
+            - 'datasetId="file://prot_current_fire_points/prot_current_fire_points.shp"'
           restartPolicy: OnFailure
 
 ---
@@ -44,14 +43,13 @@ spec:
         spec:
           containers:
           - name: notify-fire-poly
-            image: byrnedo/alpine-curl
+            image: alebatt/bat
             args:
-            - "-X POST"
-            - {{ index .Values.ingress.hosts 0 }}
-            - "-H 'Content-Type: application/json'"
-            - "-H 'id: admin'"
-            - "-H 'x-api-key: {{ .Values.apiSecret.admin }}'"
-            - "-d '{\"datasetId\": \"file://prot_current_fire_polys/prot_current_fire_polys.shp\"}'"
+            - 'POST'
+            - {{ index .Values.ingress.hosts 0 }}/v1/notify
+            - 'id:admin'
+            - 'x-api-key:{{ .Values.apiSecret.admin }}'
+            - 'datasetId="file://prot_current_fire_polys/prot_current_fire_polys.shp"'
           restartPolicy: OnFailure
 
 ---
@@ -73,12 +71,11 @@ spec:
         spec:
           containers:
           - name: notify-lightning
-            image: byrnedo/alpine-curl
+            image: alebatt/bat
             args:
-            - "-X POST"
-            - {{ index .Values.ingress.hosts 0 }}
-            - "-H 'Content-Type: application/json'"
-            - "-H 'id: admin'"
-            - "-H 'x-api-key: {{ index .Values.apiSecret.admin }}'"
-            - "-d '{\"datasetId\": \"file://lightning_BC_Jul2018.csv\"}'"
+            - 'POST'
+            - {{ index .Values.ingress.hosts 0 }}/v1/notify
+            - 'id:admin'
+            - 'x-api-key:{{ .Values.apiSecret.admin }}'
+            - 'datasetId="file://lightning_BC_Jul2018.csv"'
           restartPolicy: OnFailure

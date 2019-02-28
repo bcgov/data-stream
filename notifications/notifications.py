@@ -196,7 +196,7 @@ def __filterCsv(data, subscription):
 
 
 def __csvToJson(data):
-    return data.to_json()
+    return data.to_json(orient='records')
 
 # ideally chunk division should be factored up a level to load less of the file into memory HOWEVER file is debug, and
 # the url response is going to be in memory anyways
