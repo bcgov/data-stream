@@ -62,6 +62,10 @@ dataUrl: "https://catalogue.data.gov.bc.ca/dataset/"
 cronSchedule: "* * * * *"
 
 chunkSize: 1024
+chunkRecords: false
+
+sleep: false
+sleepTime: 1
 
 createDatabase: true
 storageClassName: default

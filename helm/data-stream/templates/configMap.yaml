@@ -21,5 +21,9 @@ data:
 
       "dataUrl": "{{ .Values.dataUrl }}",
 
-      "chunkSize": {{ .Values.chunkSize }}
+      "chunkSize": {{ .Values.chunkSize }},
+      "chunkRecords": {{ .Values.chunkRecords }},
+
+      "sleep": {{ .Values.sleep }},
+      "sleepTime": {{ .Values.sleepTime }}
     }

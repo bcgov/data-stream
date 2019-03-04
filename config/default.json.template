@@ -18,5 +18,9 @@
 
   "dataUrl": "https://catalogue.data.gov.bc.ca/dataset/",
 
-  "chunkSize": 1024
+  "chunkSize": 1024,
+  "chunkRecords": true,
+
+  "sleep": false,
+  "sleepTime": 1
 }

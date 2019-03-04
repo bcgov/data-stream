@@ -14,6 +14,8 @@ import pandas
 from datetime import datetime
 from v1.db.db import Db
 from config import Config
+from collections import namedtuple
+import time
 
 
 class Notifications:
@@ -105,7 +107,7 @@ def __mockDate(origDatetime, dateFormat):
     return currDate
 
 def __shpToJson(dict):
-    return json.dumps({"type": "FeatureCollection", "features": dict}, default=str)
+    return json.dumps({'type': 'FeatureCollection', 'features': dict}, default=dateToJson)
 
 # was loaded with pyshape
 def __filterShp(shapeReader, subscription):
@@ -198,6 +200,13 @@ def __filterCsv(data, subscription):
 def __csvToJson(data):
     return data.to_json(orient='records')
 
+
+def dateToJson(o):
+    if isinstance(o, list):
+        return list
+    if isinstance(o, datetime):
+        return o.__str__()
+
 # ideally chunk division should be factored up a level to load less of the file into memory HOWEVER file is debug, and
 # the url response is going to be in memory anyways
 def __notify(subscription, dataId, data, filename, isAFile, type):
@@ -218,7 +227,7 @@ def __notify(subscription, dataId, data, filename, isAFile, type):
         buffer = []
 
         data = __filterShp(data, subscription)
-        data = __shpToJson(data)
+        data = json.dumps(data, default = dateToJson)
     elif type == "csv":
         data = __filterCsv(data, subscription)
         data = __csvToJson(data)
@@ -247,14 +256,25 @@ def __notify(subscription, dataId, data, filename, isAFile, type):
         return
 
 
-
+    wholeRecordChunks = False
     chunks = math.ceil(len(str(data))/chunkSize)
+
+    # This kind of chunking is bad and shouldn't be used in prod because you can't guarantee the package is under a certain size which is important for many services
+    if "chunkRecords" in config.data:
+        wholeRecordChunks = config.data["chunkRecords"]
+        data = json.loads(data)
+        chunks = math.ceil(len(data)/chunkSize)
 
     for partNo in range(0, chunks):
         log.debug("Part " + str(partNo))
         startChunk = partNo*chunkSize
         endChunk = (partNo+1)*chunkSize
         chunkedData = data[startChunk:endChunk]
+        if wholeRecordChunks:
+            if type == "shp":
+                chunkedData = __shpToJson(chunkedData)
+            else:
+                chunkedData = str(chunkedData)
 
 
         jsonD = {
@@ -289,3 +309,15 @@ def __notify(subscription, dataId, data, filename, isAFile, type):
 
         else:
             log.error("Error notifying " + subscription.notificationUrl + ": " + str(r.status_code))
+
+        #demo only
+        sleepTime = 1
+        if "sleepTime" in config.data:
+            sleepTime = config.data["sleepTime"]
+        
+        sleep = False
+        if "sleep" in config.data:
+            sleep = config.data['sleep']
+
+        if sleep:
+            time.sleep(sleepTime)
