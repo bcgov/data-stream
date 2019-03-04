@@ -49,8 +49,8 @@ logLevel: "notset"
 database:
   host: "localhost"
   port: 27017
-  username: "stream"
-  password: "stream"
+  username: "root"
+  password: "root"
   dbName: "stream"
 
 apiSecret:

@@ -33,6 +33,9 @@ def subscribePost() -> object:
 
     body = request.get_json()
 
+    if body is None:
+        return jsonify({"error": "json body is required"}), HTTPStatus.HTTPStatus.BAD_REQUEST
+
     if not('datasetId') in body:
         return jsonify({"error": "datasetId is a required attribute"}), HTTPStatus.HTTPStatus.BAD_REQUEST
 
