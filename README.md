@@ -2,18 +2,18 @@
 
 Subscribe to datasets and be notified of changes via webhook
 
-#Requirements
+## Requirements
 Python 3, Pip
 
-# Running
+## Running
 
-## Locally
+### Locally
 1) `pip install -r requirements.txt`
 2) `python setup.py develop` ## this is needed for / and /version you could alternately use install here
 3) copy the default.json.template to create your own default.json (see instructions below)
 4) `python wsgi.py`
 
-## Default.json
+### Default.json
 ```
 apiPort: The port to run on
 logLevel: critical|error|warning|info|debug|notset,
@@ -27,13 +27,13 @@ dataUrl: default url to prepend when searching for data in a non shortcircuited 
 chunkSize: integer of the maximum size to send in one webhook, note this will break the json into chunks such that it is invalid until re assembled
 ```
 
-## Helm
+### Helm
 
-### Helm install (Kubernetes)
+#### Helm install (Kubernetes)
 
-### Helm update (Kubernetes)
+#### Helm update (Kubernetes)
 
-# Test
+### Test
 Not yet implemented
 ```
 $ pip install '.[test]'
