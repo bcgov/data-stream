@@ -22,13 +22,13 @@ https://www.docker.com/products/docker-desktop
 2) edit both docker-compose yml files to change the environment variables:
 
       under "db",
-
+```
           - POSTGRES_DB=rails-api-prod
           - POSTGRES_USER=user
           - POSTGRES_PASSWORD=password
-
+```
       under "rails-app",
-
+```
           - DB_USER=user        <= from db settings above
 	        - DB_PASS=password    <= from db settings above
           - SECRET_KEY_BASE=mySecretRailsKeyBase    <= Rails secret key
@@ -38,7 +38,7 @@ https://www.docker.com/products/docker-desktop
           - RAILS_API_URL=http://rails_app:3000   <= Python api url
           - BC_API_ID=user1 <= Python api key header param
           - BC_API_KEY=pass1 <= Python api key header param
-
+```
 3) in the Terminal, cd into the path of the extracted folder  
 
 4) run "docker-compose up --build"
@@ -56,8 +56,7 @@ These are the steps.
 
 1) create an image of the other api
 2) edit docker-compose_2.yml, which contains the following extra services, reflecting the mongo settings in the "default.json" file, under api/config of the the other api:
-   
-      
+```         
       python_api:
         image: bc-python-api  <= or whatever the name of the image for the other api
         ports:
@@ -74,7 +73,7 @@ These are the steps.
           - MONGO_INITDB_DATABASE=lightning
           - MONGO_INITDB_ROOT_USERNAME=lightning
           - MONGO_INITDB_ROOT_PASSWORD=lightningPass
-
+```
 
 3) run "docker-compose -f docker-compose_with_python_api.yml up --build"
 
