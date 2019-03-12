@@ -13,7 +13,7 @@ COPY . /app
 
 RUN \
 	bundle update rake && \
-	bundle exec rake RAILS_ENV=production SECRET_KEY_BASE=AnySecretKey assets:precompile && \
+	bundle exec rake RAILS_ENV=production SECRET_KEY_BASE=mySecretKey assets:precompile && \
 	bundle install
 
 RUN bundle update redis

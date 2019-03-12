@@ -44,16 +44,9 @@ paths:
       responses:
         '202':
           description: Message successfully received
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Subscription"
+          
         '204':
           description: Message NOT received
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
 
         '401':
           description: Unauthorized
@@ -134,17 +127,44 @@ paths:
 
 components:
   schemas:
+    _id:
+      type: Object
+      description: Object id
+      schema:
+        properties:
+          $oid:
+            type: string
+            description: Object id
+            example: 2531329f-fb09-4ef7-887e-84e648214436
+
+    id:
+      type: string
+      description: Object id
+      example: 2531329f-fb09-4ef7-887e-84e648214436
+
     datasetId:
       type: string
       description: Object id
       example: 2531329f-fb09-4ef7-887e-84e648214436
 
+    notificationUrl:
+      type: string
+      description: Object id
+      format: url
+      example: http://localhost:3000/api/v1/lightning
+
     SubscriptionList:
       required:
+        - _id
         - datasetId
+        - notificationUrl
       properties:
+        _id:
+          $ref: "#/components/schemas/_id"
         datasetId:
           $ref: "#/components/schemas/datasetId"
+        notificationUrl:
+          $ref: "#/components/schemas/notificationUrl"
         
     Subscriptions:
       type: array
@@ -153,10 +173,16 @@ components:
 
     Subscription:
       required:
+        - id
         - datasetId
+        - notificationUrl
       properties:
+        id:
+          $ref: "#/components/schemas/id"
         datasetId:
           $ref: "#/components/schemas/datasetId"
+        notificationUrl:
+          $ref: "#/components/schemas/notificationUrl"
         
 
     SubscriptionPost:
@@ -191,6 +217,14 @@ components:
         error:
           type: string
           description: contains a message about the failure
+
+    MessageStatus:
+      required:
+        - message
+      properties:
+        datasetId:
+          type: string
+          description: contains the status code 202
 
   securitySchemes:
     ApiKeyAuth:
