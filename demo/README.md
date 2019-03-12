@@ -1,7 +1,9 @@
 # BCDC Rails API
 
 Subscribe to datasets and be notified of changes via webhook.
-This dockerized solution inludes Redis (optional) and Postgres (for users authentication, if needed). 
+This dockerized solution inludes Redis (optional) and Postgres (for users authentication, if needed).
+
+API documentation: http://localhost:3000/api/v1/api_doc
 
 
 
