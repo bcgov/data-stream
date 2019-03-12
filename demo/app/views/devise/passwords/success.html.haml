@@ -1,0 +1,6 @@
+- content_for(:title) do
+  = t(:success_title,:scope => :password)
+
+.row
+  .devise-launch-button
+    = render(:partial => 'devise/shared/launch_app_button')

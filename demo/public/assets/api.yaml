@@ -1,0 +1,206 @@
+openapi: 3.0.0
+info:
+  title: BCDC Rails lightning Api
+  version: 1.0.0
+  license:
+    name: Apache 2.0
+  description: |-
+    # BCDC Rails Lightning API
+    This is the documentation for the BCDC Rails Lightning API.
+paths:
+  /list_subscriptions:
+    get:
+      security:
+        - ApiKeyAuth: []
+          AppId: []
+      description: Gets a list of all the subscriptions
+      responses:
+        '200':
+          description: List all subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscriptions"
+        '401':
+          description: Unauthorized
+  /lightning:
+    post:
+      security:
+        - ApiKeyAuth: []
+          AppId: []
+      summary: Endpoint ready to receive data
+      description: |-
+       Endpoint ready to receive data from the other API. It corresponds to the "notificationUrl" specified during a subscription request. 
+       It responds 202 (ACCEPTED) if the message is received, or 204 (NOT_ACCEPTABLE) if not.
+       If no api keys are passed in the header, it reponds 401 (unauthorized).
+       Data can be then processed by simply accessing the params[:data] in the mapped method in lightnings_controller.rb
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionPost"
+      responses:
+        '202':
+          description: Message successfully received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+        '204':
+          description: Message NOT received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        '401':
+          description: Unauthorized
+  
+  /subscribe:
+    post:
+      security:
+        - ApiKeyAuth: []
+          AppId: []
+      summary: Sends a subscribe request
+      description: |-
+       Sends a subscribe request to receive data to the endpoint setup in the endpoint definition. 
+       It returns the exact same response received from the other API. 
+       
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionPost"
+      responses:
+        '201':
+          description: subscription successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+        '400':
+          description: Error occured creating subscription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        '401':
+          description: Unauthorized
+
+
+  /notify:
+    post:
+      security:
+        - ApiKeyAuth: []
+          AppId: []
+      summary: Sends a notify request
+      description: |-
+        Triggers notification on a specific datasetId.
+        It returns the exact same response received from the other API.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NotifyPost"
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotifyOK"
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        '401':
+          description: Unauthorized
+
+
+components:
+  schemas:
+    datasetId:
+      type: string
+      description: Object id
+      example: 2531329f-fb09-4ef7-887e-84e648214436
+
+    SubscriptionList:
+      required:
+        - datasetId
+      properties:
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+        
+    Subscriptions:
+      type: array
+      items:
+        $ref: "#/components/schemas/SubscriptionList"
+
+    Subscription:
+      required:
+        - datasetId
+      properties:
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+        
+
+    SubscriptionPost:
+      required:
+        - datasetId
+      properties:
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+          in: "body"
+
+    NotifyPost:
+      required:
+        - datasetId
+      properties:
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+          in: "body"
+
+    NotifyOK:
+      required:
+        - message
+      properties:
+        datasetId:
+          type: string
+          example: "Started notifications"
+          in: "body"
+
+    Error:
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: contains a message about the failure
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+    AppId:
+      type: apiKey
+      in: header
+      name: id
+
+servers:
+  - url: '/api/v1/'

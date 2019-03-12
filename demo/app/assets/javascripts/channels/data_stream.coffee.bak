@@ -1,0 +1,24 @@
+App.sensor_data_stream = App.cable.subscriptions.create "IotDataStreamChannel",
+  connected: ->
+    # Called when the subscription is ready for use on the server
+    this.notify({message: 'WELCOME!!'});
+    console.log('connected')
+
+  disconnected: ->
+    # Called when the subscription has been terminated by the server
+
+  received: (data) ->
+    # Called when there's incoming data on the websocket for this channel
+     #$("#messages").removeClass('hidden')
+     #$('#messages').append(this.renderMessage(data));
+    #$('#stream').append data['sensorsdata']
+    console.log('received')
+    console.log(data)
+
+  ###speak: (data) ->
+    @perform 'speak', message: data###
+
+  notify: (message) ->
+    this.perform('notify', message: message)
+
+

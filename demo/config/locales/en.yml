@@ -1,0 +1,66 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  app_name: MyApp Service
+
+  landing:
+    confirm: Resend Confirmation Email
+    unlock: Reset Failed Logins
+    reset_password: Reset your password
+    support: Throw me a bone
+
+  confirm:
+    confirmed_title: Account Confirmed
+    instruction_title: Trouble Confirming?
+    already_done: Your account has already been confirmed.
+
+  unlock:
+    unlocked_title: Account Unlocked
+    instruction_title: Account Locked?
+    already_done: Your account is not locked.
+
+  password:
+    reset_title: Set a new Password
+    success_title: Successfully Set Password!
+    min_length: "(%{length} characters minimum)"
+    notification: Please check your email for password reset instructions.
+
+  action:
+    login: Log in
+    confirm_instructions: Resend instructions
+    unlock_instructions: Resend instructions
+    change_password: Change my password
+    reset_password: Reset my password
+    launch_app: Connect to MyApp Service
+
+  placeholder:
+    email: Email Address
+    password: Password
+    password_confirm: Confirm Password
+
+  unauthorized: User Authentication Failed
+  user_not_found: User not found, ensure your email address matches the one used to sign up, contact support@myapp.com if you don't recall which email was used
+  bad_password: Password was incorrect, if you need to reset your password, visit https://service.myapp.com
+  bad_license: Account can only be accessed from one device, device identifier check has failed
+  account_unconfirmed: Account is locked until email is confirmed. Visit https://service.myapp.com and choose "Resend Confirmation Email"
+  account_locked: Account is locked due to many failed sign in attempts. Visit https://service.myapp.com/ and choose "Reset Failed Logins"
+  account_email_exists: An account is already associated with this email address

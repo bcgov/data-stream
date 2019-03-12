@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello! There have been changes in the written contents.</h1>
+    <p>
+      The list of the changes are given below.
+    </p>
+    <p>
+      <% @change_list.each do |change_key,change_value| %>
+        <h3> <%=change_key.to_s%></h3>
+        <table>
+          <tr>
+            <th>KEY</th>
+            <th>EN_LBL</th>
+            <th>EN_INFO</th>
+            <th>NAV_TERM</th>
+            <th>STRUCTURE</th>
+            <th>GID</th>
+          </tr>
+          <%if !change_value.nil? %>
+            <% change_value.each do |structure_key,structure_description| %>
+
+            <% if !structure_description.nil? || !structure_description.empty?%>
+          
+              <tr>
+                <td><%= structure_description[0] %></td>
+                <td><%= structure_description[1] %></td>
+                <td><%= structure_description[2] %></td>
+                <td><%= structure_description[3] %></td>
+                <td><%= structure_description[4] %></td>
+                <td><%= structure_description[5] %></td>
+              </tr>
+              <% end %>
+            <% end %>
+          <%end%>
+
+        </table>
+      <%end%>
+    </p>
+
+    <p>Thanks for your time and have a great day!</p>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+class GlobalMailer < ApplicationMailer
+end

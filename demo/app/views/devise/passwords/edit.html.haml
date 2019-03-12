@@ -1,0 +1,11 @@
+- content_for(:title) do
+	= t(:reset_title,:scope => :password)
+
+.row
+	= form_for(resource,:as => resource_name,:url => password_path(resource_name),:class => 'form-horizontal',:html => { :method => :put }) do |f|
+		- if devise_has_lock_validation_errors?(resource)
+			.form-group.has-error
+				= render('devise/shared/password_edit',:f => f,:submit_title => t(:change_password,:scope => :action),:try_again => { :path => new_user_password_path,:copy => t(:reset_password,:scope => :action) })
+		- else
+			.form-group
+				= render('devise/shared/password_edit',:f => f,:submit_title => t(:change_password,:scope => :action),:try_again => nil)

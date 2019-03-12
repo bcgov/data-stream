@@ -1,0 +1,15 @@
+- content_for(:title) do
+	= t(:instruction_title,:scope => :unlock)
+
+.row
+	= form_for(resource,:as => resource_name,:url => unlock_path(resource_name),:class => 'form-horizontal') do |f|
+		- if devise_has_lock_validation_errors?(resource)
+			.form-group.has-error
+				= render('devise/shared/email_form',:f => f,:submit_title => t(:unlock_instructions,:scope => :action))
+		- else
+			.form-group
+				= render('devise/shared/email_form',:f => f,:submit_title => t(:unlock_instructions,:scope => :action))
+
+- if devise_has_lock_validation_errors?(resource) == false
+	.devise-launch-button
+		= render('devise/shared/launch_app_button')

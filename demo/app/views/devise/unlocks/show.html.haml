@@ -1,0 +1,6 @@
+- content_for(:title) do
+	= t(:unlocked_title,:scope => :unlock)
+
+.row
+	.devise-launch-button
+		= render(:partial => 'devise/shared/launch_app_button')

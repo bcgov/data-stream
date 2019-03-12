@@ -1,0 +1,85 @@
+source 'https://rubygems.org'
+
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '5.2.2'
+# Use sqlite3 as the database for Active Record
+# gem 'sqlite3'
+gem 'pg', '~> 0.18'
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+
+gem 'haml-rails'												# any views will use HAML
+gem 'devise'														# user authentication
+gem 'cancan'														# authorization
+
+gem 'kaminari'													# pagination
+#gem 'activeadmin'			# admin panels
+
+gem 'paperclip'													# file attachments for models
+#gem 'skylight', '~> 3.1.4'												# application performance monitoring
+gem 'google_drive', '3.0.1'							# google drive API
+gem 'csv-diff'													# Generation of differences between CSV files
+gem 'rest-client', '2.1.0.rc1'										# Sendng and getttng REST requests
+gem 'roo', '2.4.0'										# Conversion of xlsx
+gem 'signet', '0.7.2'
+gem 'oauth2', '1.1.0'
+gem 'jwt', '1.5.1'
+#gem 'activeadmin_blaze_theme'
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
+gem 'puma', '3.11.4'
+gem 'redis'
+gem 'mqtt'
+gem 'httplog'
+gem 'redoc-rails'
+
+group :development, :test do
+	gem 'rspec-rails'								# use rspec for testing
+	gem 'guard-rspec'								# guard to run tests automatically when sources change
+	gem 'spring-commands-rspec'			# integrate rspec with spring for faster execution
+	gem 'rspec-nc'									# test results to OSX notification center
+    gem 'annotate'									# comment data models with their matching DB schema
+	gem 'webmock'
+	gem 'typhoeus'
+	gem 'faraday'
+	gem 'rails-erd'
+	# Call 'byebug' anywhere in the code to stop execution and get a debugger console
+	gem 'byebug'
+
+  gem 'bcrypt', '~> 3.1.12', platforms: [:ruby]
+
+# Use CoffeeScriptSource
+  gem 'coffee-script-source', '1.8.0'
+
+# assigns and assert_template have been extracted to the rails-controller-testing gem.
+# To continue using these methods in your controller tests,
+# add gem 'rails-controller-testing' to the Gemfile.
+  gem 'rails-controller-testing'
+end
+
+group :development do
+	# Access an IRB console on exception pages or by using <%= console %> in views
+	gem 'web-console', '~> 3.7.0'
+
+	# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+	gem 'spring'
+end
+
+group :test do
+	gem 'simplecov'									# test coverage reports
+end

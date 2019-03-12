@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello There! There weres some issues we ran into while fetching google data</h1>
+    <span style="font-size: 20px">Your error is : </span>
+    <h3><%=@msg%></h3>
+    <p>
+      The the list of error messages are given below.
+    </p>
+    <p>
+      500 = There are some error from google's side. Usually for for throttling or google's api not working. Wait for a bit and try refreshing and getting values again.
+            If the error persists, it means the google's api is having trouble. Oops?
+    </p>
+
+    <%= button_to('here',admin_i2loc_generated_dog_contents_path,:method => :get) %>
+
+
+
+    <p>Thanks for your time and have a great day!</p>
+  </body>
+</html>

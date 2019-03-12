@@ -1,0 +1,6 @@
+- content_for(:title) do
+	= t(:confirmed_title,:scope => :confirm)
+
+.row
+	.devise-launch-button
+		= render(:partial => 'devise/shared/launch_app_button')

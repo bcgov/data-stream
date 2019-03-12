@@ -1,0 +1,22 @@
+!!!5
+%html
+  %head
+    = render('shared/header')
+
+  %body
+    .container
+      .row
+        %br
+        .span4
+        .span4
+        %br
+
+      .row
+        .col-sm-6.col-sm-offset-3
+          %h2
+            .text-center
+              = yield(:title)
+
+      .row
+        .col-sm-4.col-sm-offset-4
+          = yield

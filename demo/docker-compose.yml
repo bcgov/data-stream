@@ -1,0 +1,50 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    ports:
+     - "5432:5432"
+    environment:
+      - POSTGRES_DB=rails-api-prod
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+
+  rails_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/bash -c "bundle exec rails s -p 3000 -b 0.0.0.0 && bundle exec rake db:schema:load"
+
+    environment:
+      - DB_USER=user
+      - DB_PASS=password
+      - DB_ADDR=db
+      - DB_PORT=5432
+      - SECRET_KEY_BASE=mySecretRailsKeyBase
+      - ID=admin
+      - X-API-KEY=mySecretKey
+      - REDIS_URL=redis://redis:6379
+      - RAILS_ENV=production
+      - BC_API_URL=http://python_api:3003
+      - RAILS_API_URL=http://rails_app:3000
+      - BC_API_ID=user1
+      - BC_API_KEY=pass1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+
+  redis:
+      image: redis:5.0.1-alpine
+      ports:
+        - "6379:6379"
+      volumes:
+        - 'redis-volume:/data'
+
+volumes:
+  postgres-volume:
+  redis-volume:
