@@ -21,13 +21,14 @@ https://www.docker.com/products/docker-desktop
 
 2) edit both docker-compose yml files to change the environment variables:
 
-      under "db",
+   under "db"
+
 ```
           - POSTGRES_DB=rails-api-prod
           - POSTGRES_USER=user
           - POSTGRES_PASSWORD=password
 ```
-      under "rails-app",
+   under "rails-app",
 ```
           - DB_USER=user        <= from db settings above
 	        - DB_PASS=password    <= from db settings above
