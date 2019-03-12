@@ -21,7 +21,7 @@ spec:
             - {{ index .Values.ingress.hosts 0 }}/v1/notify
             - 'id:admin'
             - 'x-api-key:{{ .Values.apiSecret.admin }}'
-            - 'datasetId="file://prot_current_fire_points/prot_current_fire_points.shp"'
+            - 'datasetId="file://fire_points_campbell_river/prot_current_fire_points.shp"'
           restartPolicy: OnFailure
 
 ---
@@ -49,7 +49,7 @@ spec:
             - {{ index .Values.ingress.hosts 0 }}/v1/notify
             - 'id:admin'
             - 'x-api-key:{{ .Values.apiSecret.admin }}'
-            - 'datasetId="file://prot_current_fire_polys/prot_current_fire_polys.shp"'
+            - 'datasetId="file://fire_polys_campbell_river/prot_current_fire_polys.shp"'
           restartPolicy: OnFailure
 
 ---
@@ -77,5 +77,5 @@ spec:
             - {{ index .Values.ingress.hosts 0 }}/v1/notify
             - 'id:admin'
             - 'x-api-key:{{ .Values.apiSecret.admin }}'
-            - 'datasetId="file://lightning_BC_Jul2018.csv"'
+            - 'datasetId="file://lightning_bcalbers.csv"'
           restartPolicy: OnFailure
