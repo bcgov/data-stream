@@ -8,7 +8,8 @@ API documentation: http://localhost:3000/api/v1/api_doc
 
 
 # Requirements
-Docker installed on machine. 
+Docker installed on machine.
+
 https://www.docker.com/products/docker-desktop
 
 
@@ -22,9 +23,9 @@ https://www.docker.com/products/docker-desktop
 
       under "db",
 
-          - POSTGRES_DB
-	        - POSTGRES_USER
-	        - POSTGRES_PASSWORD 
+          - POSTGRES_DB=rails-api-prod
+          - POSTGRES_USER=user
+          - POSTGRES_PASSWORD=password
 
       under "rails-app",
 
@@ -44,7 +45,7 @@ https://www.docker.com/products/docker-desktop
 
 5) enter the "rails_app" container bash and launch the following to create and populate the db:
    - rake db:schema:load 
-   - rake db:seed (changing the params as you please)
+   - rake db:seed 
 
 
 
@@ -54,8 +55,9 @@ Using a docker-compose yml file, all containers for different services can easil
 These are the steps.
 
 1) create an image of the other api
-2) edit docker-compose_2.yml, which contains the following extra services, reflecting the mongo settings in the "default.json" file, under the config folder of the the other api:
+2) edit docker-compose_2.yml, which contains the following extra services, reflecting the mongo settings in the "default.json" file, under api/config of the the other api:
    
+      
       python_api:
         image: bc-python-api  <= or whatever the name of the image for the other api
         ports:
@@ -72,6 +74,7 @@ These are the steps.
           - MONGO_INITDB_DATABASE=lightning
           - MONGO_INITDB_ROOT_USERNAME=lightning
           - MONGO_INITDB_ROOT_PASSWORD=lightningPass
+
 
 3) run "docker-compose -f docker-compose_with_python_api.yml up --build"
 
