@@ -8,10 +8,8 @@ API documentation: http://localhost:3000/api/v1/api_doc
 
 
 ## Requirements
-Docker installed on machine.
-
-https://www.docker.com/products/docker-desktop
-
+- (Recommended) Docker installed => https://www.docker.com/products/docker-desktop
+- or setup your lcoal environment with Ruby 2.5.3 and the libraries listed in Dockerfile. 
 
 
 ## Running
