@@ -23,15 +23,17 @@ https://www.docker.com/products/docker-desktop
 
    under "db"
 
-```
+   ```
           - POSTGRES_DB=rails-api-prod
           - POSTGRES_USER=user
           - POSTGRES_PASSWORD=password
-```
-   under "rails-app",
-```
+   ```
+
+   under "rails-app"
+
+   ```
           - DB_USER=user        <= from db settings above
-	        - DB_PASS=password    <= from db settings above
+	      - DB_PASS=password    <= from db settings above
           - SECRET_KEY_BASE=mySecretRailsKeyBase    <= Rails secret key
           - ID=admin                    <= Rails api key header param 
           - X-API-KEY=mySecretKey       <= Rails api key header param 
@@ -39,7 +41,7 @@ https://www.docker.com/products/docker-desktop
           - RAILS_API_URL=http://rails_app:3000   <= Python api url
           - BC_API_ID=user1 <= Python api key header param
           - BC_API_KEY=pass1 <= Python api key header param
-```
+   ```
 3) in the Terminal, cd into the path of the extracted folder  
 
 4) run "docker-compose up --build"
@@ -52,12 +54,12 @@ https://www.docker.com/products/docker-desktop
 
 
 ## Extra (for local development)
-Using a docker-compose yml file, all containers for different services can easily communicate with each other.
-These are the steps.
+Using a docker-compose yml file, all containers can easily communicate with each other.
+Below are the steps.
 
-1) create an image of the other api
+1) create an image for the other api,
 2) edit docker-compose_2.yml, which contains the following extra services, reflecting the mongo settings in the "default.json" file, under api/config of the the other api:
-```         
+   ```         
       python_api:
         image: bc-python-api  <= or whatever the name of the image for the other api
         ports:
@@ -74,11 +76,12 @@ These are the steps.
           - MONGO_INITDB_DATABASE=lightning
           - MONGO_INITDB_ROOT_USERNAME=lightning
           - MONGO_INITDB_ROOT_PASSWORD=lightningPass
-```
+   ```
 
-3) run "docker-compose -f docker-compose_with_python_api.yml up --build"
+3) run "docker-compose -f docker-compose_2.yml up --build"
 
-
+* CTRL+C to stop all containers
+** run "docker-compose -f docker-compose_2.yml down" to stop all containers
 
 
 ## Production Setup
