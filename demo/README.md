@@ -7,16 +7,16 @@ API documentation: http://localhost:3000/api/v1/api_doc
 
 
 
-# Requirements
+## Requirements
 Docker installed on machine.
 
 https://www.docker.com/products/docker-desktop
 
 
 
-# Running
+## Running
 
-## Local Setup 
+### Local Setup 
 1) Extract the ZIP file
 
 2) edit both docker-compose yml files to change the environment variables:
@@ -80,9 +80,9 @@ Below are the steps.
 
 3) run "docker-compose -f docker-compose_2.yml up --build"
 
-* CTRL+C to stop all containers
-** run "docker-compose -f docker-compose_2.yml down" to stop all containers
+   - CTRL+C to stop all containers in the current window
+   - run "docker-compose -f docker-compose_2.yml down" to kill all containers
 
 
-## Production Setup
-1) if deploying using a docker-compose yml file (or just as a starting point), make sure to replicate and edit the same environment variables in your deployment setup.
+### Production Setup
+   If deploying using a docker-compose yml file (or just as a starting point), make sure to replicate and edit the same environment variables in your deployment setup.
