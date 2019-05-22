@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "datastream-frontend.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "datastream-frontend.name" . }}
+    helm.sh/chart: {{ include "datastream-frontend.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "datastream-frontend.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
