@@ -6,7 +6,7 @@ html(lang="en")
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
         link(rel="stylesheet" href="/stylesheets/basics.css")
         script.
-            var wsHost = (#{env.WS_HOST}) ? #{env.WS_HOST} + '/' : 'http://127.0.0.1:3001';
+            var wsHost = ("#{env.WS_HOST}") ? "#{env.WS_HOST}" + '/' : 'http://127.0.0.1:3001';
             var ws = new WebSocket(wsHost);
             ws.onopen = function (event) {
                 console.log("websocket open!")
