@@ -2,7 +2,7 @@ var t = setInterval(runFunction, 1000);
 var global_json = "";
 
 function fetchAPI() {
-  var targetUrl = (process.env.HOST) ? process.env.HOST + '/test_connection' : 'http://127.0.0.1:3000/test_connection';
+  var targetUrl = (window.location.origin) ? window.location.origin + '/test_connection' : 'http://127.0.0.1:3000/test_connection';
   //var targetURL = 'http://localhost:3000/test_connection';
   fetch(targetUrl, {method: 'GET', mode: 'no-cors', headers: {Accept: 'application/json'}
     })
@@ -60,7 +60,7 @@ function submit_choices() {
 
 //ONLY USE FOR DEMO
 function refreshFile() {
-  var refreshUrl = (process.env.HOST) ? process.env.HOST + '/on_load' : 'http://127.0.0.1:3000/on_load';
+  var refreshUrl = (window.location.origin) ? window.location.origin + '/on_load' : 'http://127.0.0.1:3000/on_load';
   //var refreshURL = 'http://localhost:3000/on_load';
   fetch(refreshUrl, {
     method: "GET",
@@ -103,7 +103,7 @@ function add_subscriptions(values) {
 
   var sub_array = clean_form_values(value_split);
   console.log(sub_array);
-  var subscribeUrl = (process.env.HOST) ? process.env.HOST + '/subscribe' : 'http://127.0.0.1:3000/subscribe';
+  var subscribeUrl = (window.location.origin) ? window.location.origin + '/subscribe' : 'http://127.0.0.1:3000/subscribe';
   //var subscribe_url = 'http://localhost:3000/subscribe';
   fetch(subscribeUrl, {
     method: "POST",
@@ -148,7 +148,7 @@ function clean_form_values(value_split) {
 }
 
 function updateSubscriptions(sub_array) {
-  var writeUrl = (process.env.HOST) ? process.env.HOST + '/write_file' : 'http://127.0.0.1:3000/write_file';
+  var writeUrl = (window.location.origin) ? window.location.origin + '/write_file' : 'http://127.0.0.1:3000/write_file';
   //var writeUrl = 'http://localhost:3000/write_file';
   fetch(writeUrl, {
     method: "POST",
@@ -188,7 +188,7 @@ function postNotification(notification) {
 
 function test_Notification() {
   $('#notify_text').text("Loading...");
-  var testUrl = (process.env.HOST) ? process.env.HOST + '/test_notify' : 'http://127.0.0.1:3000/test_notify';
+  var testUrl = (window.location.origin) ? window.location.origin + '/test_notify' : 'http://127.0.0.1:3000/test_notify';
   //var testurl = 'http://localhost:3000/test_notify';
   fetch(testUrl, {
     method: "GET",
