@@ -1,0 +1,54 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        title DataStreamDemo
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        link(rel="stylesheet" href="/stylesheets/basics.css")
+        script.
+            var ws = new WebSocket("ws://localhost:3001");
+            ws.onopen = function (event) {
+                console.log("websocket open!")
+            };
+            ws.onmessage = function (event) {
+                var notify_message = (JSON.stringify(event.data)).replace("\\\"", "")
+                notify_message = notify_message.replace("\\\"", "")
+                $('#notify_text').text(notify_message);
+                console.log("Websocket hit:" + JSON.stringify(event.data));
+            }
+        script(src="/javascripts/main.js" type="text/javascript")
+        script(src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous")
+    body(onload="refreshFile()")
+        .jumbotron.container
+            h1(style="margin-left: 10px") Welcome to the BC Gov Data-Stream demo!
+            br
+            h3(style="margin-left: 10px") Test Connection:
+            button.btn.btn-primary(type="button" onclick="fetchAPI()") Test!
+            #connection_response.border
+                code#connection_text Waiting...
+            br
+            h3(style="margin-left:10px") Database Subscription Test
+            form#db_choices
+                .subscribe_field
+                    .radio_field.overflow-auto.border
+                        #fire_points.database_option.border-bottom(onclick="selectDB(id)")
+                            input(type="checkbox" name="prot_current_fire_points-shp" id="prot_current_fire_points-shp")
+                            |  prot_current_fire_points
+                            br
+                        #fire_polys.database_option.border-bottom(onclick="selectDB(id)")
+                            input(type="checkbox" name="prot_current_fire_polys-shp" id = "prot_current_fire_polys-shp")
+                            |  prot_current_fire_polys
+                            br
+                        #lightning_bc.database_option.border-bottom(onclick="selectDB(id)")
+                            input(type="checkbox" name="lightning_BC_Jul2018-csv" id="lightning_BC_Jul2018-csv")
+                            |  lightning_BC_Jul2018
+                            br
+                    .info_field.border-top.border-right.border-bottom
+                        h4(style="") Subscriptions
+                        code.info_text Select an option to display relevant data.
+                input#subscribe_button.btn.btn-primary(type="submit" style="margin-left: 10px" value="Subscribe" onclick="submit_choices()")
+            .response_log.overflow-auto.border
+                code#response_text.moving Awaiting response...
+            button.btn.btn-primary(type="button" onclick="test_Notification()") Notify Test!
+            .notify_log.overflow-auto.border
+                code#notify_text

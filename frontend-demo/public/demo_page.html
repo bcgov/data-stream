@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DataStreamDemo</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="stylesheets/basics.css">
+  <script src="javascripts/main.js" type="text/javascript"></script>
+  <script
+    src="http://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+</head>
+<body onload="get_subscriptions()">
+
+<div class="jumbotron container">
+  <h1 style>Welcome to the BC Gov Data-Stream demo!</h1><br>
+  <h3 style="margin-left: 10px">Test Connection:</h3> <button type="button" class="btn btn-primary" onclick="fetchAPI()">Test!</button>
+
+  <div id="connection_response">
+    <code id="connection_text">Waiting...</code>
+  </div>
+  <br>
+
+  <h3 style="margin-left:10px">Database Subscription Test</h3>
+  <form id="db_choices">
+  <div class="subscribe_field">
+    <div class="radio_field overflow-auto border">
+      <div class="database_option border-bottom" id="fire_points" onclick="selectDB(id)">
+        <input type="checkbox" name="prot_current_fire_points"> prot_current_fire_points<br>
+      </div>
+        <div class="database_option border-bottom" id="fire_polys" onclick="selectDB(id)">
+          <input type="checkbox" name="prot_current_fire_polys"> prot_current_fire_polys<br>
+        </div>
+        <div class="database_option border-bottom" id="lightning_bc" onclick="selectDB(id)">
+          <input type="checkbox" name="lightning_BC_Jul2018"> lightning_BC_Jul2018<br>
+        </div>
+    </div>
+    <div class="info_field">
+      <code class="info_text">Select an option to display relevant data.</code>
+    </div>
+  </div>
+    <input type="submit" style="margin-left: 10px" class="btn btn-primary" id="subscribe_button" value="Subscribe" onclick="submit_choices()">
+  </form>
+
+  <div class="response_log overflow-auto">
+    <code class="moving" id="response_text">Awaiting response...</code>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>

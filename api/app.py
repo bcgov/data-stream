@@ -88,7 +88,7 @@ def create_app(test_config=None):
 
         return jsonify({
             "ok": "OK"
-        }),HTTPStatus.ACCEPTED
+        }), HTTPStatus.ACCEPTED
 
     @app.route('/version', methods=['GET'], strict_slashes=False)
     def version():
@@ -109,8 +109,10 @@ def create_app(test_config=None):
         responseObj = {
             "v": v,
             "hash": hash,
-            "version": version
+            "version": version,
         }
         return jsonify(responseObj)
+
+    #code for webpage demo, move to where it is appropriate
 
     return app

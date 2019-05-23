@@ -9,11 +9,11 @@
     "username": "lightning",
     "password": "lightningPass",
     "dbName": "lightning"
-  }
+  },
 
   "apiSecret": {
     "user1": "pass1",
-    "user2": "pass2",
+    "user2": "pass2"
   },
 
   "dataUrl": "https://catalogue.data.gov.bc.ca/dataset/",

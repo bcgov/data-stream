@@ -1,0 +1,27 @@
+{
+  "name": "apidemoexpress",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express.io": "^1.1.13",
+    "http-errors": "~1.6.3",
+    "jQuery": "^1.7.4",
+    "jsdom": "^15.1.0",
+    "morgan": "~1.9.1",
+    "node-fetch": "^2.6.0",
+    "node-webhooks": "^1.4.2",
+    "pug": "^2.0.3",
+    "request": "^2.88.0",
+    "request-stats": "^3.0.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "ws": "^7.0.0"
+  }
+}

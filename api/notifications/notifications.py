@@ -232,7 +232,7 @@ def __notify(subscription, dataId, data, filename, isAFile, type):
         data = __filterCsv(data, subscription)
         data = __csvToJson(data)
 
-
+    # Around here put the conditional for if the notifications have occurred too close in time to each other
     if isAFile:
         log.debug("isAFile sub route")
         jsonD = {
@@ -260,6 +260,7 @@ def __notify(subscription, dataId, data, filename, isAFile, type):
     chunks = math.ceil(len(str(data))/chunkSize)
 
     # This kind of chunking is bad and shouldn't be used in prod because you can't guarantee the package is under a certain size which is important for many services
+    # Used for Ruby on Rails
     if "chunkRecords" in config.data:
         wholeRecordChunks = config.data["chunkRecords"]
         data = json.loads(data)

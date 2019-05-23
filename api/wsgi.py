@@ -41,7 +41,7 @@ def main(port: int = conf.data['apiPort']) -> object:
 
     log.info('Loading server...')
     load_start = timer()
-    http = WSGIServer(('', port), app.wsgi_app)
+    http = WSGIServer(('0.0.0.0', port), app.wsgi_app)
     load_end = timer()
     log.info('Load time: %s', str(load_end - load_start))
 

@@ -1,0 +1,86 @@
+
+h3 {
+  display: inline-block;
+}
+
+.jumbotron {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+button {
+  margin-left: 10px;
+  margin-top: -10px;
+  float: top;
+}
+
+.response_log {
+  margin-bottom: 20px;
+}
+.display_response {
+  position: relative;
+}
+
+.radio_field {
+  height: 250px;
+  width: 25%;
+  background-color: white;
+  border-radius: 15px 0px 0px 15px;
+  display: inline-block;
+}
+
+.info_field {
+  float: right;
+  height: 250px;
+  width:75%;
+  background-color: white;
+  border-radius: 0px 15px 15px 0px;
+  border-color: #222222;
+}
+
+.database_option {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top:10px;
+}
+
+.info_field {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.database_option:hover {
+  cursor: pointer;
+}
+
+input:hover {
+  cursor: pointer;
+}
+
+.response_log {
+  margin-top: 24px;
+  width: 100%;
+  height:300px;
+  padding-left: 10px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.notify_log {
+  margin-top: 24px;
+  width: 100%;
+  height:50px;
+  padding-left: 10px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+#connection_response {
+  background-color: white;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-bottom:10px;
+  padding-top: 10px;
+}
+
+
