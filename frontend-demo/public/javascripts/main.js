@@ -2,8 +2,9 @@ var t = setInterval(runFunction, 1000);
 var global_json = "";
 
 function fetchAPI() {
-  var targetURL = 'http://localhost:3000/test_connection';
-  fetch(targetURL, {method: 'GET', mode: 'no-cors', headers: {Accept: 'application/json'}
+  var targetUrl = (process.env.HOST) ? process.env.HOST + '/test_connection' : 'http://127.0.0.1:3000/test_connection';
+  //var targetURL = 'http://localhost:3000/test_connection';
+  fetch(targetUrl, {method: 'GET', mode: 'no-cors', headers: {Accept: 'application/json'}
     })
     .then(function(response){
       response = response.clone();
@@ -27,19 +28,6 @@ function fetchAPI() {
       $('#connection_text').text("Connection successful.");
     })
     .catch(err => console.error('Caught error: ', err))
-}
-
-function ajaxAPI() {
-  var url = 'http://localhost:3003/version';
-
-  $.ajax({url: url,
-    success: function() {
-      alert('success')
-    },
-    error: function() {
-      alert('error')
-    }
-  });
 }
 
 function selectDB(option_id) {
@@ -72,8 +60,9 @@ function submit_choices() {
 
 //ONLY USE FOR DEMO
 function refreshFile() {
-  var refreshURL = 'http://localhost:3000/on_load';
-  fetch(refreshURL, {
+  var refreshUrl = (process.env.HOST) ? process.env.HOST + '/on_load' : 'http://127.0.0.1:3000/on_load';
+  //var refreshURL = 'http://localhost:3000/on_load';
+  fetch(refreshUrl, {
     method: "GET",
     headers:{'Content-type': 'application/json',
       'User-agent': 'request'
@@ -101,7 +90,7 @@ function get_subscriptions() {
 }
 
 function add_subscriptions(values) {
-  var string_values = values.toString();
+  //var string_values = values.toString();
   var string_values = values.replace("%20", " ");
   var value_split = string_values.split(/[, =&]+/);
   console.log("Values:");
@@ -114,8 +103,9 @@ function add_subscriptions(values) {
 
   var sub_array = clean_form_values(value_split);
   console.log(sub_array);
-  var subscribe_url = 'http://localhost:3000/subscribe';
-  fetch(subscribe_url, {
+  var subscribeUrl = (process.env.HOST) ? process.env.HOST + '/subscribe' : 'http://127.0.0.1:3000/subscribe';
+  //var subscribe_url = 'http://localhost:3000/subscribe';
+  fetch(subscribeUrl, {
     method: "POST",
     body: JSON.stringify(sub_array),
     headers:{'Content-type': 'application/json',
@@ -158,7 +148,8 @@ function clean_form_values(value_split) {
 }
 
 function updateSubscriptions(sub_array) {
-  var writeUrl = 'http://localhost:3000/write_file';
+  var writeUrl = (process.env.HOST) ? process.env.HOST + '/write_file' : 'http://127.0.0.1:3000/write_file';
+  //var writeUrl = 'http://localhost:3000/write_file';
   fetch(writeUrl, {
     method: "POST",
     body: JSON.stringify(sub_array),
@@ -197,8 +188,9 @@ function postNotification(notification) {
 
 function test_Notification() {
   $('#notify_text').text("Loading...");
-  var testurl = 'http://localhost:3000/test_notify';
-  fetch(testurl, {
+  var testUrl = (process.env.HOST) ? process.env.HOST + '/test_notify' : 'http://127.0.0.1:3000/test_notify';
+  //var testurl = 'http://localhost:3000/test_notify';
+  fetch(testUrl, {
     method: "GET",
     mode: 'no-cors',
     headers:{'Content-type': 'application/json',
