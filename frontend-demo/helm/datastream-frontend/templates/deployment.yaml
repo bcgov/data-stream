@@ -22,12 +22,19 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           {{ if .Values.openshiftCICD }}
-          image: "{{ template "datastream-frontend.fullname" . }}-image:{{ .Values.repo.tag }}"
+          image: "docker-registry.default.svc:5000/{{ .Release.Namespace }}/{{ template "datastream-frontend.fullname" . }}-image:{{ .Values.repo.tag }}"
           {{ else }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           {{- end }}
 
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: HOST
+              value: {{ .Values.host | quote }}
+            - name: API_HOST
+              value: {{ .Values.api_host | quote }}
+            - name: WS_HOST
+              value: {{ .Values.ws_host | quote }}
           ports:
             - name: http
               containerPort: 3000

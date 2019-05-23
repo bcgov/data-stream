@@ -20,7 +20,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: {{ template "datastream-frontend.fullname" . }}-image:{{ .Values.repo.tag }}
+      name: "{{ template "datastream-frontend.fullname" . }}-image:{{ .Values.repo.tag }}"
   source:
     type: Git
     git:

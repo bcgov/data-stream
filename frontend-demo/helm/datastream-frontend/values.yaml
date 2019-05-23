@@ -9,6 +9,12 @@ openshiftCICD: True
 repo:
   ref: develop
   url: https://github.com/bcgov/data-stream
+  tag: latest
+
+host: "localhost"
+api_host: "localhost"
+ws_host: "localhost"
+webhookKey: "1234567890"
 
 image:
   repository: nginx
