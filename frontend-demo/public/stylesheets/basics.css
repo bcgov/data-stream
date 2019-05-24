@@ -13,6 +13,9 @@ button {
   margin-top: -10px;
   float: top;
 }
+.info_text {
+  white-space: pre-line;
+}
 
 .response_log {
   margin-bottom: 20px;

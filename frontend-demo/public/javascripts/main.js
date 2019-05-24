@@ -60,6 +60,11 @@ function submit_choices() {
 
 //ONLY USE FOR DEMO
 function refreshFile() {
+  const local = false;
+  if (!local) {
+    $('#notify_button').hide();
+    $('.notify_log').hide();
+  }
   var refreshUrl = (window.location.origin) ? window.location.origin + '/on_load' : 'http://127.0.0.1:3000/on_load';
   //var refreshURL = 'http://localhost:3000/on_load';
   fetch(refreshUrl, {
@@ -69,6 +74,19 @@ function refreshFile() {
     },
     json: true
   }).then(function (response) {
+    response = response.clone();
+    console.log('Success');
+    response.json().then(data => {
+      var currentSubString = "";
+      for(var i = 0; i < data.length; i++) {
+        if (data[i] !== '') {
+          currentSubString = currentSubString + data[i] + "\n";
+          $('#' + data[i]).attr({"disabled": true, "checked":false});
+        }
+      }
+      $('.info_text').text(currentSubString);
+      console.log(currentSubString);
+    });
     console.log('ready for subscriptions');
   }).catch(function (error) {
     console.log(error);
@@ -165,12 +183,10 @@ function updateSubscriptions(sub_array) {
         console.log("Disabling: " + data);
         if (i !== data.length - 1 || data[i]!=='') {
           $('#' + data[i]).attr({"disabled": true, "checked":false});
-          display_sub_text = display_sub_text + data[i] + ", "
+          display_sub_text = display_sub_text + data[i] + "\n";
         } else if (data[i]!=='') {
           $('#' + data[i]).attr({"disabled": true, "checked":false});
-          display_sub_text = display_sub_text + data[i]
-        } else {
-          continue;
+          display_sub_text = display_sub_text + data[i] + "\n";
         }
       }
       console.log(display_sub_text);

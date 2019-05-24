@@ -11,6 +11,7 @@ router.post('/', function(req, res, next) {
 
     res_json = [];
 
+
     fs.readFile('./temp_files/temp.txt', 'utf-8', function (err, data) {
 
         for (var i = 0; i < sub_array.length; i++) {
@@ -18,6 +19,7 @@ router.post('/', function(req, res, next) {
                 console.log(sub_array[i] + " is already subscribed to.");
                 continue;
             } else {
+                //delete later when dynamic file testing is tested and ready
                 var datasetId = sub_array[i];
                 datasetId = datasetId.replace('-', '.');
                 if (sub_array[i]==="prot_current_fire_points.shp")  {
@@ -33,8 +35,8 @@ router.post('/', function(req, res, next) {
                     method: 'POST',
                     headers: {
                         'User-Agent': 'request',
-                        'id': 'user1',
-                        'x-api-key': 'pass1'
+                        'id': process.env.API_USER,
+                        'x-api-key': process.env.API_PASS
                     },
                     body: {
                         'datasetId': datasetId,

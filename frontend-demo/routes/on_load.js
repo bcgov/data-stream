@@ -4,8 +4,10 @@ var request = require('request');
 
 router.get('/', function(req, res, next) {
     var fs = require('fs');
-    fs.truncate('./temp_files/temp.txt', 0, function(){console.log('done')});
-    res.send('Done');
+    fs.readFile('./temp_files/temp.txt', 'utf-8', function(err, data) {
+        var split_data = data.split("\n");
+        res.send(JSON.stringify(split_data));
+    });
 });
 
 module.exports = router;
