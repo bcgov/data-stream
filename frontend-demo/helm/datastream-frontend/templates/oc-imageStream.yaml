@@ -1,0 +1,14 @@
+{{ if .Values.openshiftCICD }}
+
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+    name: {{ template "datastream-frontend.fullname" . }}-image
+    labels:
+        app: {{ template "datastream-frontend.name" . }}
+        chart: {{ template "datastream-frontend.chart" . }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+spec: {}
+
+{{- end }}
