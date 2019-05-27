@@ -13,9 +13,6 @@ button {
   margin-top: -10px;
   float: top;
 }
-.info_text {
-  white-space: pre-line;
-}
 
 .response_log {
   margin-bottom: 20px;
@@ -23,36 +20,86 @@ button {
 .display_response {
   position: relative;
 }
-
-.radio_field {
+.subscribe_unsubscribe_container {
   height: 250px;
-  width: 25%;
-  background-color: white;
-  border-radius: 15px 0px 0px 15px;
-  display: inline-block;
+  width: 100%;
 }
 
-.info_field {
-  float: right;
+.radio_sub_field {
   height: 250px;
-  width:75%;
   background-color: white;
-  border-radius: 0px 15px 15px 0px;
+  border-radius: 15px;
+}
+
+.current_subs_container {
+  min-height: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+
+
+label {
+  margin-left: 10px;
+}
+#unsubscribe_button {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.radio_unsub_field {
+  height: 250px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.subscribe_field {
+  width: 100%;
+  border-radius: 15px;
+}
+
+#subscribe_button {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.unsubscribe_field {
+  height: 250px;
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
   border-color: #222222;
 }
 
-.database_option {
+.sub_database_option {
   padding-left: 10px;
   padding-bottom: 10px;
   padding-top:10px;
+  height: 50px;
 }
 
-.info_field {
+.unsub_database_option {
   padding-left: 10px;
-  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top:10px;
+  height: 50px;
 }
 
-.database_option:hover {
+#current_subs_container {
+  overflow: auto;
+  padding-left: 10px;
+  height: 150px;
+  max-height: 150px;
+}
+.selection_container {
+  height: 150px;
+  max-height: 150px;
+}
+.sub_database_option:hover {
+  cursor: pointer;
+}
+
+.unsub_database_option:hover {
   cursor: pointer;
 }
 

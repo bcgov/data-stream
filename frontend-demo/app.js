@@ -13,6 +13,7 @@ var subscribeRouter = require('./routes/subscribe');
 var notifyRouter = require('./routes/notify');
 var testNotifyRouter = require('./routes/test_notify');
 var onLoadRouter = require('./routes/on_load');
+var unsubscribeRouter = require('./routes/unsubscribe');
 
 var app = express();
 app.locals.env = process.env;
@@ -34,6 +35,7 @@ app.use('/subscribe', subscribeRouter);
 app.use('/notify', notifyRouter);
 app.use('/test_notify', testNotifyRouter);
 app.use('/on_load', onLoadRouter);
+app.use('/unsubscribe', unsubscribeRouter);
 
 //app.use(bodyParser({limit: '500Mb'}));
 var websockets = require('./public/javascripts/web_socket');
