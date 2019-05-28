@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from v1.routes.docs import docs
 from v1.routes.subscribe import subscribe
 from v1.routes.notify import notify
+from v1.routes.unsubscribe import unsubscribe
 
 
 v1 = Blueprint('v1', 'v1')
@@ -21,3 +22,4 @@ class Register:
         app.register_blueprint(subscribe, url_prefix="/v1/subscribe")
         app.register_blueprint(notify, url_prefix="/v1/notify")
         app.register_blueprint(docs, url_prefix="/v1/api-docs")
+        app.register_blueprint(unsubscribe, url_prefix="/v1/unsubscribe")

@@ -103,6 +103,44 @@ paths:
         '401':
           description: unauthorized
 
+  /unsubscribe:
+    post:
+      security:
+        - ApiKeyAuth: []
+          AppId: []
+      summary: Unsubscribes a client from webhooks
+      description: |-
+        Unsubscribes a client from getting notifications from the chosen databases. The client sends to the server
+        a list of their desired databases to unsubsribe to , as well as their unique notification url.
+        ```
+        {
+             "datasetIds": json list of all ids to unsubscribe to,
+             "notifcationUrl": the unique url of the client also used in /notify
+         }
+         ```
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnsubscribePost"
+      responses:
+        '201':
+          description: subscription successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Deletion"
+        '400':
+          description: Error occured deleting subscription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        '401':
+          description: unauthorized
 
 components:
   schemas:
