@@ -6,7 +6,7 @@ html(lang="en")
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
         link(rel="stylesheet" href="/stylesheets/basics.css")
         script.
-            var ws = new WebSocket("ws://localhost:3001");
+            var wsHost = ('#{env.WS_HOST}') ? "#{env.WS_HOST}" + '/' : 'http://127.0.0.1:3001';
             ws.onopen = function (event) {
                 console.log("websocket open!")
             };
@@ -17,7 +17,7 @@ html(lang="en")
                 console.log("Websocket hit:" + JSON.stringify(event.data));
             }
         script(src="/javascripts/main.js" type="text/javascript")
-        script(src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous")
+        script(src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous")
     body(onload="refreshFile()")
         .jumbotron.container
             h1(style="margin-left: 10px") Welcome to the BC Gov Data-Stream demo!
