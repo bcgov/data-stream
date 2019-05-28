@@ -6,7 +6,7 @@ WORKDIR /app
 RUN npm ci
 
 COPY ./frontend-demo/ /app/
-
+RUN chmod 777 temp_files
 EXPOSE 3000
 EXPOSE 3001
 

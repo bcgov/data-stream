@@ -14,10 +14,8 @@ router.get('/', function(req, res, next) {
         } else {
             console.log(error);
             fs.writeFile('./temp_files/temp.txt', '', {flag : 'wx'}, function () {
-                fs.readFile('./temp_files/temp.txt', 'utf-8', function(err, data) {
-                    var split_data = data.split("\n");
-                    res.send(JSON.stringify(split_data));
-                });
+                var empty_array = [];
+                res.send(JSON.stringify((empty_array)));
             });
         }
     });
