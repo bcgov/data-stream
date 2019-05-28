@@ -13,7 +13,7 @@ html(lang="en")
             ws.onmessage = function (event) {
                 var notify_message = (JSON.stringify(event.data)).replace("\\\"", "")
                 notify_message = notify_message.replace("\\\"", "")
-                $('#notify_text').text(notify_message);
+                $('#response_text').text(notify_message);
                 console.log("Websocket hit:" + JSON.stringify(event.data));
             }
         script(src="/javascripts/main.js" type="text/javascript")

@@ -108,6 +108,7 @@ function remove_subscriptions(client_unsub_array, flask_unsub_array) {
         force_remove(flask_unsub_array[i] + "_subbed");
         enableDb(flask_unsub_array[i]);
       }
+      $('#response_text').text("Deletion success! " + data);
     });
   });
 }
@@ -117,6 +118,7 @@ function enableDb(Db) {
   theDb.attr({"disabled" : false});
   theDb.prop({"checked" : false});
 }
+
 function force_remove(sub) {
   $('#' + sub).remove();
 }
@@ -138,7 +140,6 @@ function refreshFile() {
     json: true
   }).then(function (response) {
     response = response.clone();
-    console.log('Success');
     response.json().then(data => {
       var currentSubString = "";
       for(var i = 0; i < data.length; i++) {
@@ -147,27 +148,11 @@ function refreshFile() {
           $('#' + data[i]).attr({"disabled": true, "checked":false});
         }
       }
-      $('.info_text').text(currentSubString);
-      console.log(currentSubString);
     });
     console.log('ready for subscriptions');
   }).catch(function (error) {
     console.log(error);
   });
-}
-
-function get_subscriptions() {
-  if (global_json === "") {
-    var data = "No subscriptions.";
-    $('.info_text').text(data);
-
-    // fs.writeFile('../temp_files/subs.txt',data, (err) => {
-    //   if (err) console.log(err);
-    //   console.log("Successfully Written to File.")
-    // })
-  } else {
-    $('.info_text').text(global_json)
-  }
 }
 
 function disableSub(sub_id) {
@@ -267,8 +252,6 @@ function postSubscriptions(sub_array) {
           disableSub(sub_array[i]);
         }
       }
-      console.log(display_sub_text);
-      $('.info_text').text(display_sub_text);
     });
   });
 
