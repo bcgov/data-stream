@@ -32,9 +32,15 @@ spec:
             - name: HOST
               value: {{ .Values.host | quote }}
             - name: API_HOST
-              value: {{ .Values.api_host | quote }}
+              value: {{ .Values.api.host | quote }}
             - name: WS_HOST
               value: {{ .Values.ws_host | quote }}
+            - name: API_USER
+              value: {{ .Values.api.user | quote }}
+            - name: API_PASS
+              value: {{ .Values.api.pass | quote }}
+            
+            
           ports:
             - name: http
               containerPort: 3000
