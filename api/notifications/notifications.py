@@ -211,7 +211,7 @@ def dateToJson(o):
 # the url response is going to be in memory anyways
 def __notify(subscription, dataId, data, filename, isAFile, type):
     log = logging.getLogger(__name__)
-
+    threadId = str(datetime.now())
     config = Config()
     ##note that since data is of type string each char is a byte so this is actually 8*?
     chunkSize = 1024
@@ -284,7 +284,8 @@ def __notify(subscription, dataId, data, filename, isAFile, type):
             "filename": filename,
             "part": (partNo+1),
             "chunks": chunks,
-            "data": chunkedData
+            "data": chunkedData,
+            "notificationId": threadId
         }
 
         log.debug("Calling " + subscription.notificationUrl)
