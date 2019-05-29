@@ -12,7 +12,12 @@ repo:
   tag: latest
 
 host: "localhost"
-api_host: "localhost"
+
+api:
+  host: "localhost"
+  user: "user1"
+  pass: "pass1"
+
 ws_host: "localhost"
 webhookKey: "1234567890"
 
