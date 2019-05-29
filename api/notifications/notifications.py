@@ -36,7 +36,7 @@ def triggerNotifications(dataId):
     subs = db.Subscriptions.objects(datasetId=dataId)
 
     if len(subs)<=0:
-        log.debug("No subscriptions for this datafile")
+        log.debug("No subscriptions for this datafile %s", dataId)
         return
 
     fileShortCircuit = "file://"
