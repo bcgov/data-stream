@@ -5,31 +5,34 @@ const WebSocket = require('ws');
 var chunkData = {};
 var chunks_received = 0;
 var filename = "";
+notificationData = {};
 /*posts data to another post request to deliver to the flask API*/
 router.post('/', function(req, res, next) {
-    console.log('Server notified.');
-    console.log(req.body);
+
+    console.log(req.body.notificationId);
     res.status(200).end();
-    chunkData[req.body.datasetId + " " + req.body.part] = req.body.data;
-    chunks_received += 1;
-    filename = req.body.filename;
+    chunkData[req.body.part] = req.body.data;
+    var notificationDataKey = req.body.datasetId+"("+req.body.notificationId+")";
+    notificationData[notificationDataKey] = chunkData;
     // var keys = Object.keys(chunkData);
     // console.log(keys);
     // if (keys.indexOf(req.body.datasetId) === -1){
     //     chunkData[req.body.datasetId] = {};
     // }
 
-    if(req.body.part === req.body.chunks) {
+    if(Object.keys(notificationData[notificationDataKey]).length === req.body.chunks) {
         console.log("Last chunk!");
-        console.log(chunks_received);
         //console.log(chunkData);
         var websockets = require('../public/javascripts/web_socket');
         var conns = websockets.getConnections();
-        console.log(conns);
+        //console.log(conns);
         for (var i=0; i<conns.length; i++) {
-            conns[i].send(JSON.stringify(chunks_received + " chunks received from " + filename + " at " + Date.now()));
+            //conns[i].send(JSON.stringify(notificationData[notificationDataKey]));
+            conns[i].send(JSON.stringify(req.body.chunks + " chunks received from " + req.body.datasetId + " at " + req.body.notificationId));
         }
-        chunks_received=0;
+        console.log("Finished notifying for " + req.body.datasetId + " at " + req.body.notificationId);
+        delete notificationData[notificationDataKey];
+        console.log(notificationData);
         // var websockets = require('../public/javascripts/web_socket');
         // var conns = websockets.getConnections();
         // var wskeys = Object.keys(conns);
