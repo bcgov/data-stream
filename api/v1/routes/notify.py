@@ -21,7 +21,7 @@ def subscribePost() -> object:
     if not('datasetId') in body:
         return jsonify({"error": "datasetId is a required attribute"}), HTTPStatus.BAD_REQUEST
 
-    datasetId = body['datasetId']
+    datasetId = body['datasetId'].replace('"', "")
 
     err, message = Notifications.triggerNotifications(datasetId)
 
