@@ -15,6 +15,7 @@ router.post('/', function(req, res, next) {
     var chunkData = notificationData[notificationDataKey];
     chunkData[req.body.part] = req.body.data;
     notificationDataKey[notificationDataKey] = chunkData;
+    console.log("current chunks sent from notification " + notificationDataKey + " = " + Object.keys(notificationData[notificationDataKey]).length);
     //notificationDataKey[notificationDataKey][req.body.part] = req.body.data;
     // var keys = Object.keys(chunkData);
     // console.log(keys);
