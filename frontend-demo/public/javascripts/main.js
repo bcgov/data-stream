@@ -14,11 +14,11 @@ function fetchAPI() {
               var body = JSON.parse(data.body);
               $('#connection_text').text("Connected to " + body.name);
               console.log(JSON.stringify(data));
-              $('#response_text').text(" > " + JSON.stringify(data));
+              $('#response_text').append(" > " + JSON.stringify(data) + "<br />");
           } else {
               $('#connection_text').text("Failed to connect.");
               console.log(JSON.stringify(data));
-              $('#response_text').text(" > " + JSON.stringify(data));
+              $('#response_text').append(" > " + JSON.stringify(data));
           }
 
       });
@@ -108,7 +108,7 @@ function remove_subscriptions(client_unsub_array, flask_unsub_array) {
         force_remove(flask_unsub_array[i] + "_subbed");
         enableDb(flask_unsub_array[i]);
       }
-      $('#response_text').text("Deletion success! " + data);
+      $('#response_text').append(" > Deletion success! " + data + "<br />");
     });
   });
 }
@@ -202,7 +202,7 @@ function add_subscriptions(values) {
         response = response.clone();
         console.log('Success');
         response.json().then(data => {
-          $('#response_text').text(" > " + JSON.stringify(data));
+          $('#response_text').append(" > " + JSON.stringify(data) + "<br />");
           });
         postSubscriptions(sub_array);
       })
@@ -260,7 +260,7 @@ function postSubscriptions(sub_array) {
 function postNotification(notification) {
   console.log("Notification!");
   console.log(json.stringify(notification));
-  $('#response_text').text(JSON.stringify(notification));
+  $('#response_text').append(" > " + JSON.stringify(notification) + "<br />");
 }
 
 function test_Notification() {

@@ -16,6 +16,7 @@ button {
 
 .response_log {
   margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 .display_response {
   position: relative;
