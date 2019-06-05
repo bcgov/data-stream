@@ -2,18 +2,20 @@ var express = require('express');
 var router = express.Router();
 const WebSocket = require('ws');
 
-var chunkData = {};
-var chunks_received = 0;
-var filename = "";
 notificationData = {};
 /*posts data to another post request to deliver to the flask API*/
 router.post('/', function(req, res, next) {
 
     console.log(req.body.notificationId);
     res.status(200).end();
-    chunkData[req.body.part] = req.body.data;
     var notificationDataKey = req.body.datasetId+"("+req.body.notificationId+")";
-    notificationData[notificationDataKey] = chunkData;
+    if (!(Object.keys(notificationData)).includes(notificationDataKey)) {
+        notificationData[notificationDataKey] = {};
+    }
+    var chunkData = notificationData[notificationDataKey];
+    chunkData[req.body.part] = req.body.data;
+    notificationDataKey[notificationDataKey] = chunkData;
+    //notificationDataKey[notificationDataKey][req.body.part] = req.body.data;
     // var keys = Object.keys(chunkData);
     // console.log(keys);
     // if (keys.indexOf(req.body.datasetId) === -1){
