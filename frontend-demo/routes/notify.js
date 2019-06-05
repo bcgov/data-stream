@@ -32,7 +32,8 @@ router.post('/', function(req, res, next) {
             //conns[i].send(JSON.stringify(notificationData[notificationDataKey]));
             conns[i].send(JSON.stringify(req.body.chunks + " chunks received from " + req.body.datasetId + " at " + req.body.notificationId));
         }
-        console.log("Finished notifying for " + req.body.datasetId + " at " + req.body.notificationId);
+        console.log(notificationData[notificationDataKey]);
+        console.log("Finished notifying for " + req.body.datasetId + " at " + notificationDataKey);
         delete notificationData[notificationDataKey];
         console.log(notificationData);
         // var websockets = require('../public/javascripts/web_socket');
