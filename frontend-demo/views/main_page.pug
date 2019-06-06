@@ -14,7 +14,7 @@ html(lang="en")
             ws.onmessage = function (event) {
                 var notify_message = (JSON.stringify(event.data)).replace("\\\"", "")
                 notify_message = notify_message.replace("\\\"", "")
-                $('#response_text').append(" > " + notify_message + "<br>\n");
+                $('#response_text').append(" > " + notify_message + "\n");
                 console.log("Websocket hit:" + JSON.stringify(event.data));
             }
         script(src="/javascripts/main.js" type="text/javascript")
@@ -57,7 +57,7 @@ html(lang="en")
                         #current_sub_container.current_sub_container.border-top.border-bottom
                         input#unsubscribe_button.btn.btn-primary(type="submit" style="margin-left: 10px" value="Unsubscribe" onclick="unsub_choices()")
             .response_log.overflow-auto.border
-                code#response_text
+                pre#response_text
             button#notify_button.btn.btn-primary(type="button" onclick="test_Notification()") Notify Test!
             .notify_log.overflow-auto.border
                 code#notify_text

@@ -18,6 +18,12 @@ button {
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
+
+#response_text {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
 .display_response {
   position: relative;
 }
