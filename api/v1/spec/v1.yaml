@@ -238,6 +238,23 @@ components:
           type: string
           description: contains a message about the failure
 
+    UnsubscribePost:
+      required:
+        - datasetId
+      properties:
+        datasetId:
+          $ref: "#/components/schemas/datasetId"
+          in: "body"
+
+    UnsubscribeOK:
+      required:
+        - message
+        properties:
+          datasetId:
+            type: string
+            example: "4 records deleted."
+            in: "body"
+
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
