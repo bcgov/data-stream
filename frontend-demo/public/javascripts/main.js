@@ -113,15 +113,6 @@ function remove_subscriptions(client_unsub_array, flask_unsub_array) {
   });
 }
 
-function enableAll() {
-  var toEnable = $('.sub_database_option');
-  for (var i = 0; i <toEnable.length; i++) {
-    var element = toEnable[i];
-    element.attr({"disabled" : false});
-    element.prop({"checked" : false});
-  }
-}
-
 function enableDb(Db) {
   var theDb = $('#' + Db);
   theDb.attr({"disabled" : false});
@@ -260,7 +251,6 @@ function postSubscriptions(sub_array) {
       var display_sub_text = "";
       for(var i = 0; i < sub_array.length; i++) {
         if(sub_array[i]!== ''){
-          enableAll();
           update_sub(sub_array[i]);
           disableSub(sub_array[i]);
         }
