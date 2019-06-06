@@ -36,7 +36,7 @@ router.post('/', function (req,res,err) {
             console.log(error);
         }
         else if(response) {
-            console.log(response.body);
+            console.log(response.body.message);
             var to_file = "";
             for(var i = 0; i < file_unsub_array.length; i++) {
                 to_file = to_file + file_unsub_array[i] + "\n";
@@ -44,7 +44,7 @@ router.post('/', function (req,res,err) {
             fs.truncate('/path/to/file', 0, function(){
                 fs.writeFile('./temp_files/temp.txt', to_file, {encoding:'utf8',flag:'w'}, (err) => {
                     if (err) throw err;
-                    return res.json(response.body);
+                    return res.json(response.body.message);
                 });
             });
         }
