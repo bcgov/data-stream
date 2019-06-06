@@ -131,7 +131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Deletion"
+                $ref: "#/components/schemas/UnsubscribeOK"
         '400':
           description: Error occured deleting subscription
           content:
