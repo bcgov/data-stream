@@ -113,6 +113,15 @@ function remove_subscriptions(client_unsub_array, flask_unsub_array) {
   });
 }
 
+function enableAll() {
+  var toEnable = $('.sub_database_option');
+  for (var i = 0; i <toEnable.length; i++) {
+    var element = toEnable[i];
+    element.attr({"disabled" : false});
+    element.prop({"checked" : false});
+  }
+}
+
 function enableDb(Db) {
   var theDb = $('#' + Db);
   theDb.attr({"disabled" : false});
@@ -141,13 +150,16 @@ function refreshFile() {
   }).then(function (response) {
     response = response.clone();
     response.json().then(data => {
-      var currentSubString = "";
       for(var i = 0; i < data.length; i++) {
         if (data[i] !== '') {
-          currentSubString = currentSubString + data[i] + "\n";
-          $('#' + data[i]).attr({"disabled": true, "checked":false});
+          update_sub(data[i]);
+          disableSub(data[i]);
         }
       }
+      var container = $('#current_sub_container');
+      console.log((container.height()));
+      container.height(150);
+      container.css("overflow-y", "scroll");
     });
     console.log('ready for subscriptions');
   }).catch(function (error) {
@@ -248,6 +260,7 @@ function postSubscriptions(sub_array) {
       var display_sub_text = "";
       for(var i = 0; i < sub_array.length; i++) {
         if(sub_array[i]!== ''){
+          enableAll();
           update_sub(sub_array[i]);
           disableSub(sub_array[i]);
         }
