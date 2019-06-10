@@ -24,6 +24,8 @@ html(lang="en")
             h1(style="margin-left: 10px") Welcome to the BC Gov Data-Stream demo!
             br
             p(style="margin-left: 10px") This demo was made to showcase the functionality of the BC Gov Data Stream API. Below is a simple subscribe/unsubscribe interface to show notifications from the BC Gov data stream server. Subscribe to the "lightning" database to begin showing notifications.
+            p(style="margin-left: 10px") Notifications might take a long time to occur. On a new subscription all data is new. Subsequent notifications will occur faster due to smaller amounts of new data.
+            p(style="margin-left: 10px") For more information on the API used in this demo, check out http://data-stream-wlev6y-dev.pathfinder.gov.bc.ca/v1/api-docs.
             h3(style="margin-left: 10px") Test Connection:
             button.btn.btn-primary(type="button" onclick="fetchAPI()") Test!
             #connection_response.border
