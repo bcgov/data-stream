@@ -249,11 +249,11 @@ components:
     UnsubscribeOK:
       required:
         - message
-        properties:
-          datasetId:
-            type: string
-            example: "4 records deleted."
-            in: "body"
+      properties:
+        datasetId:
+          type: string
+          example: "4 records deleted."
+          in: "body"
 
   securitySchemes:
     ApiKeyAuth:
