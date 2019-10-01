@@ -69,13 +69,13 @@ function unsub_choices() {
     }
     if (flask_unsub_array.length===0) {
       console.log("Nothing to unsub");
-
     }
 
     remove_subscriptions(client_unsub_array, flask_unsub_array);
     $('#unsub_choices').submit(function (e) {
       e.preventDefault();
     });
+    location.reload();
   }
 }
 
