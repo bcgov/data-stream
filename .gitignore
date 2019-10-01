@@ -114,6 +114,3 @@ venv.bak/
 
 config/*.json
 datasets/*
-
-# Front-end stuff
-frontend-demo/node_modules
