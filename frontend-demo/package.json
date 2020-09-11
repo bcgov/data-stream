@@ -16,7 +16,7 @@
     "jsdom": "^15.1.0",
     "lodash": "^4.17.14",
     "morgan": "~1.9.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "node-webhooks": "^1.4.2",
     "pug": "^2.0.3",
     "request": "^2.88.0",
