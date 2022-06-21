@@ -15,7 +15,7 @@ MarkupSafe==1.1.0
 mongoengine==0.16.3
 mongomock==3.14.0
 more-itertools==5.0.0
-numpy==1.16.1
+numpy==1.22.0
 pandas==0.24.1
 pluggy==0.8.1
 py==1.7.0
