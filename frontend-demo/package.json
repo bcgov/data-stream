@@ -21,7 +21,7 @@
     "pug": "^2.0.3",
     "request": "^2.88.0",
     "request-stats": "^3.0.0",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.5.0",
     "socket.io-client": "^2.2.0",
     "ws": "^7.0.0"
   }
